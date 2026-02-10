@@ -15,7 +15,12 @@
 <img width="893" height="1280" alt="изображение" src="https://github.com/user-attachments/assets/3082d49e-ac4c-45e2-93a2-6cf1e107b13c" />
 <img width="960" height="1280" alt="изображение" src="https://github.com/user-attachments/assets/ea932497-6dd9-4dc1-9e54-11d748612a4e" />
 <img width="960" height="1280" alt="изображение" src="https://github.com/user-attachments/assets/96437bdd-4f3e-48c1-9426-a2a635cb6807" />
+
 Gerber в папке hardware
+
+<img width="923" height="865" alt="изображение" src="https://github.com/user-attachments/assets/f7ddb8a4-db3f-47e4-beff-8559ebb4bc21" />
+
+
 [Schematic_Lora.pdf](https://github.com/user-attachments/files/25218298/Schematic_Lora.pdf)
 
 
