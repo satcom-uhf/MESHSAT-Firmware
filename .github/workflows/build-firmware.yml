@@ -1,0 +1,48 @@
+name: Build firmware
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (with submodules, full history)
+        uses: actions/checkout@v5
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Cache PlatformIO packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.platformio/.cache
+          key: pio-cache-${{ runner.os }}
+
+      - name: Install PlatformIO
+        run: pip install --upgrade platformio
+
+      - name: Fix legacy env names (dots are invalid in modern PIO)
+        run: sed -i -E 's/^
+$$
+env:([^].]*)(\.[^][]*)
+$$
+/[env:\1_\2]/g' platformio.ini
+
+      - name: Build firmware (meshtastic-diy-v1)
+        run: pio run -v -e meshtastic-diy-v1
+
+      - name: Upload firmware artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: meshsat-firmware-meshtastic-diy-v1
+          path: |
+            .pio/build/meshtastic-diy-v1/firmware.bin
+            .pio/build/meshtastic-diy-v1/bootloader.bin
+            .pio/build/meshtastic-diy-v1/partitions.bin
+          if-no-files-found: error
